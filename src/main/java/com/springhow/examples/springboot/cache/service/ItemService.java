@@ -25,6 +25,11 @@ public class ItemService {
 
     @Cacheable(value = "items", key = "#id")
     public Item getItem(Integer id) {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         Item item = itemRepository.findById(id).orElseThrow(RuntimeException::new);
         logger.info("Loading data from DB {}", item);
         return item;
